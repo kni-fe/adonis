@@ -2291,98 +2291,54 @@ end
 
 -- Startup
 
-
 if EXISTING_INSTANCE_LIVE and EXISTING_INSTANCE then
-
     local started = replaceCurrentInstance(true)
-
     if not started then
-
         recordEvent("status", "Replacement finished in non-installed/degraded state.")
-
     end
-
 elseif EXISTING_INSTANCE then
-
-
     if type(EXISTING_INSTANCE.state) == "table" then
-
         EXISTING_INSTANCE.state.installed = false
-
         EXISTING_INSTANCE.state.degraded = true
-
     end
 
     if EXECUTOR_ENV and rawget(EXECUTOR_ENV, CONFIG.INSTANCE_KEY) == EXISTING_INSTANCE then
-
         rawset(EXECUTOR_ENV, CONFIG.INSTANCE_KEY, nil)
-
     end
 
     if CONFIG.IDEMPOTENT and type(STATE) == "table" and STATE.installed then
-
         fatal("This v%s state is already marked active; refusing to double-hook.", VERSION)
-
         fatal("Use AdonisBypass.Reload() or unload before starting another copy.")
-
         alive = false
-
     else
-
         setGlobal(CONFIG.INSTANCE_KEY, INSTANCE)
-
         if EXECUTOR_ENV then
-
             rawset(EXECUTOR_ENV, CONFIG.STATE_KEY, STATE)
-
             rawset(EXECUTOR_ENV, CONFIG.API_KEY, API)
-
             rawset(EXECUTOR_ENV, "AdonisBypass_Dump", API.Dump)
-
         end
 
         local started = runBypass(false)
-
         if not started then
-
             recordEvent("status", "Instance finished in non-installed/degraded state.")
-
         end
-
     end
-
 else
-
     if CONFIG.IDEMPOTENT and type(STATE) == "table" and STATE.installed then
-
         fatal("This v%s state is already marked active; refusing to double-hook.", VERSION)
-
         fatal("Use AdonisBypass.Reload() or unload before starting another copy.")
-
         alive = false
-
     else
-
         setGlobal(CONFIG.INSTANCE_KEY, INSTANCE)
-
         if EXECUTOR_ENV then
-
             rawset(EXECUTOR_ENV, CONFIG.STATE_KEY, STATE)
-
             rawset(EXECUTOR_ENV, CONFIG.API_KEY, API)
-
             rawset(EXECUTOR_ENV, "AdonisBypass_Dump", API.Dump)
-
         end
 
         local started = runBypass(false)
-
         if not started then
-
             recordEvent("status", "Instance finished in non-installed/degraded state.")
-
         end
-
     end
-
 end
