@@ -32,7 +32,7 @@ local CONFIG = {
 
 }
 
-local DEBUG = true
+local DEBUG = false
 
 local VERSION = CONFIG.VERSION
 
