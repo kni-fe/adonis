@@ -1767,10 +1767,6 @@ local function startHealthScaffold()
 
         log("Hook health checking requested; recovery remains disabled.")
 
-    end
-
-    recordEvent("health", "Health-check scaffold enabled; active verification not implemented in v4.5.4.")
-
 end
 
 -- Optional status hotkey
