@@ -2,7 +2,7 @@ local CONFIG = {
 
     PREFIX = "knife.lua",
 
-    VERSION = "1.0.0",
+    VERSION = "1.0.1",
 
     IDENTITY = 7,
 
@@ -24,7 +24,7 @@ local CONFIG = {
 
     STATUS_HOTKEY = nil,
 
-    STATE_KEY = "__AdonisBypassState_v1_0_0",
+    STATE_KEY = "__AdonisBypassState_v1_0_1",
 
     INSTANCE_KEY = "__AdonisBypass_Instance",
 
@@ -1752,21 +1752,15 @@ startMonitor = function()
 end
 
 local function startHealthScaffold()
-
     if not DEBUG or not CONFIG.ENABLE_HOOK_HEALTH_CHECK then
-
         return
-
     end
 
     if CONFIG.ENABLE_AUTO_RECOVERY then
-
         fail("Auto-recovery is configured, but recovery remains disabled pending target-specific validation.")
-
     else
-
         log("Hook health checking requested; recovery remains disabled.")
-
+    end
 end
 
 -- Optional status hotkey
